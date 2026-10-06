@@ -1,0 +1,361 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  /* Tema gelap (default) */
+  --page-rgb: 14 13 12;
+  --panel-rgb: 21 19 17;
+  --pop-rgb: 25 22 19;
+  --bg: #0e0d0c;
+  --surface: #151311;
+  --surface-2: #1a1714;
+  --line: rgba(236, 224, 200, 0.075);
+  --line-soft: rgba(232, 211, 160, 0.07);
+  --gold: #d0a55a;
+  --gold-soft: #e8cd96;
+  --text: #ebe4d6;
+  --text-strong: #f6f1e7;
+  --placeholder: #6f6759;
+  --field: rgba(255, 255, 255, 0.03);
+  --scroll: #2f2a22;
+  --scroll-hover: #4a4235;
+  --selection: rgba(208, 165, 90, 0.35);
+  --c-slate-50: 26 23 20;
+  --c-slate-100: 33 29 25;
+  --c-slate-200: 44 39 33;
+  --c-slate-300: 59 53 44;
+  --c-slate-400: 127 118 103;
+  --c-slate-500: 157 147 131;
+  --c-slate-600: 188 178 160;
+  --c-slate-700: 213 204 187;
+  --c-slate-800: 235 228 214;
+  --c-slate-900: 246 241 231;
+  --c-slate-950: 251 248 242;
+  --c-ink-50: 243 238 228;
+  --c-ink-100: 226 219 204;
+  --c-ink-200: 201 192 174;
+  --c-ink-300: 163 154 137;
+  --c-ink-400: 125 117 102;
+  --c-ink-500: 90 83 72;
+  --c-ink-600: 58 52 43;
+  --c-ink-700: 38 34 28;
+  --c-ink-800: 25 22 19;
+  --c-ink-900: 16 14 12;
+  --c-blue-50: 34 26 14;
+  --c-blue-100: 46 35 18;
+  --c-blue-200: 75 58 28;
+  --c-blue-300: 111 88 40;
+  --c-blue-400: 220 184 119;
+  --c-blue-500: 208 165 90;
+  --c-blue-600: 201 160 79;
+  --c-blue-700: 185 143 63;
+  --c-blue-800: 154 117 47;
+  --c-blue-900: 122 90 36;
+  --c-brand-50: 33 26 15;
+  --c-brand-100: 43 34 19;
+  --c-brand-200: 69 54 26;
+  --c-brand-300: 232 205 150;
+  --c-brand-400: 217 176 106;
+  --c-brand-500: 201 160 79;
+  --c-brand-600: 220 184 119;
+  --c-brand-700: 230 201 143;
+  --c-brand-800: 240 220 176;
+  --c-brand-900: 74 52 22;
+  --c-emerald-50: 15 32 25;
+  --c-emerald-100: 19 41 31;
+  --c-emerald-200: 29 74 54;
+  --c-emerald-300: 44 122 86;
+  --c-emerald-400: 63 174 122;
+  --c-emerald-500: 52 165 111;
+  --c-emerald-600: 47 143 96;
+  --c-emerald-700: 38 117 80;
+  --c-emerald-800: 28 90 61;
+  --c-emerald-900: 20 64 44;
+  --c-red-50: 42 20 18;
+  --c-red-100: 54 26 23;
+  --c-red-200: 90 40 34;
+  --c-red-300: 138 58 48;
+  --c-red-400: 224 106 92;
+  --c-red-500: 220 90 76;
+  --c-red-600: 201 69 56;
+  --c-red-700: 168 52 40;
+  --c-red-800: 138 43 33;
+  --c-red-900: 107 34 26;
+  --c-amber-50: 42 32 16;
+  --c-amber-100: 53 40 15;
+  --c-amber-200: 90 68 22;
+  --c-amber-300: 138 106 31;
+  --c-amber-400: 240 180 41;
+  --c-amber-500: 224 160 32;
+  --c-amber-600: 200 138 18;
+  --c-amber-700: 160 111 16;
+  --c-amber-800: 127 87 13;
+  --c-amber-900: 95 66 10;
+  --c-amber-950: 58 40 6;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --page-rgb: 250 247 240;
+  --panel-rgb: 255 255 255;
+  --pop-rgb: 255 255 255;
+  --bg: #faf7f0;
+  --surface: #ffffff;
+  --surface-2: #f5f0e4;
+  --line: rgba(70, 52, 22, 0.11);
+  --line-soft: rgba(70, 52, 22, 0.08);
+  --gold: #a97a30;
+  --gold-soft: #8a6226;
+  --text: #2a251d;
+  --text-strong: #171410;
+  --placeholder: #9a907e;
+  --field: #ffffff;
+  --scroll: #d8cfbc;
+  --scroll-hover: #bfb39a;
+  --selection: rgba(201, 160, 79, 0.35);
+  --c-slate-50: 247 243 234;
+  --c-slate-100: 240 234 221;
+  --c-slate-200: 229 221 204;
+  --c-slate-300: 211 201 182;
+  --c-slate-400: 138 128 112;
+  --c-slate-500: 111 102 86;
+  --c-slate-600: 84 76 63;
+  --c-slate-700: 61 55 45;
+  --c-slate-800: 42 37 29;
+  --c-slate-900: 23 20 16;
+  --c-slate-950: 14 12 9;
+  --c-ink-50: 42 37 29;
+  --c-ink-100: 61 55 45;
+  --c-ink-200: 84 76 63;
+  --c-ink-300: 111 102 86;
+  --c-ink-400: 125 117 102;
+  --c-ink-500: 138 128 112;
+  --c-ink-600: 58 52 43;
+  --c-ink-700: 38 34 28;
+  --c-ink-800: 25 22 19;
+  --c-ink-900: 16 14 12;
+  --c-blue-50: 251 243 223;
+  --c-blue-100: 246 232 196;
+  --c-blue-200: 236 214 160;
+  --c-blue-300: 217 184 114;
+  --c-blue-400: 208 165 90;
+  --c-blue-500: 201 160 79;
+  --c-blue-600: 185 138 53;
+  --c-blue-700: 163 118 42;
+  --c-blue-800: 138 98 38;
+  --c-blue-900: 107 75 31;
+  --c-brand-50: 251 243 223;
+  --c-brand-100: 246 232 196;
+  --c-brand-200: 236 214 160;
+  --c-brand-300: 232 205 150;
+  --c-brand-400: 201 160 79;
+  --c-brand-500: 185 138 53;
+  --c-brand-600: 138 98 38;
+  --c-brand-700: 107 75 31;
+  --c-brand-800: 74 52 22;
+  --c-brand-900: 58 40 16;
+  --c-emerald-50: 232 246 238;
+  --c-emerald-100: 210 237 221;
+  --c-emerald-200: 168 220 192;
+  --c-emerald-300: 111 197 154;
+  --c-emerald-400: 63 174 122;
+  --c-emerald-500: 52 165 111;
+  --c-emerald-600: 47 143 96;
+  --c-emerald-700: 38 117 80;
+  --c-emerald-800: 28 90 61;
+  --c-emerald-900: 20 64 44;
+  --c-red-50: 253 236 235;
+  --c-red-100: 250 219 216;
+  --c-red-200: 244 182 176;
+  --c-red-300: 236 139 129;
+  --c-red-400: 224 106 92;
+  --c-red-500: 220 90 76;
+  --c-red-600: 201 69 56;
+  --c-red-700: 168 52 40;
+  --c-red-800: 138 43 33;
+  --c-red-900: 107 34 26;
+  --c-amber-50: 253 245 227;
+  --c-amber-100: 250 234 194;
+  --c-amber-200: 244 214 138;
+  --c-amber-300: 236 191 82;
+  --c-amber-400: 240 180 41;
+  --c-amber-500: 224 160 32;
+  --c-amber-600: 200 138 18;
+  --c-amber-700: 160 111 16;
+  --c-amber-800: 127 87 13;
+  --c-amber-900: 95 66 10;
+  --c-amber-950: 58 40 6;
+}
+
+/* Transisi halus saat ganti tema (dinonaktifkan jika user memilih reduced motion) */
+@media (prefers-reduced-motion: no-preference) {
+  html.theme-anim, html.theme-anim *, html.theme-anim *::before, html.theme-anim *::after {
+    transition: background-color .25s ease, border-color .25s ease, color .25s ease, fill .25s ease !important;
+  }
+}
+
+@layer base {
+  html { -webkit-font-smoothing: antialiased; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  h1, h2, h3, h4 { letter-spacing: -0.01em; }
+  h1, h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700; }
+  ::selection { background: var(--selection); color: var(--text-strong); }
+  input, select, textarea {
+    background-color: var(--field);
+    color: var(--text-strong);
+  }
+  input::placeholder, textarea::placeholder { color: var(--placeholder); }
+  select option { background: var(--surface-2); color: var(--text-strong); }
+}
+
+@layer utilities {
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+  .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+  .card { @apply bg-white rounded-xl border border-slate-200; }
+  .num { font-family: 'Cormorant Garamond', Georgia, serif; font-variant-numeric: lining-nums tabular-nums; font-weight: 600; letter-spacing: -0.01em; }
+  .font-display { font-family: 'Cormorant Garamond', Georgia, serif; }
+  .gold-text {
+    background: linear-gradient(135deg, #f3e3b8, #d0a55a 55%, #b8893a);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hairline-gold { background: linear-gradient(90deg, transparent, rgba(208,165,90,0.5), transparent); height: 1px; }
+}
+
+/* ===== Lapisan tema gelap: permukaan ===== */
+.bg-white { background-color: var(--surface); }
+.bg-white.shadow-sm, .bg-white.shadow-softer, .bg-white.shadow-soft { box-shadow: none; }
+.border-white, .ring-white { border-color: var(--surface); --tw-ring-color: var(--surface); }
+.bg-slate-50.border, .bg-slate-100.border { border-color: var(--line); }
+.border-slate-200, .border-slate-100 { border-color: var(--line); }
+.divide-slate-100 > :not([hidden]) ~ :not([hidden]) { border-color: var(--line-soft); }
+.bg-black\/60 { background-color: rgba(4,3,2,0.72); }
+
+/* Tabel: header elegan */
+thead th { letter-spacing: 0.06em; }
+
+/* ===== Teks berwarna: gelap => terang agar terbaca di latar gelap; terang => emas/hijau/merah tua ===== */
+:root:not([data-theme="light"]) .text-blue-600 { color: #e0be7e; }
+:root:not([data-theme="light"]) .text-blue-700 { color: #e6c98f; }
+:root:not([data-theme="light"]) .text-blue-800 { color: #ecd6a6; }
+:root:not([data-theme="light"]) .text-blue-900 { color: #f2e2bc; }
+:root:not([data-theme="light"]) .text-blue-400 { color: #dcb877; }
+:root:not([data-theme="light"]) .text-blue-100 { color: #2a1f0c; }
+:root:not([data-theme="light"]) .fill-blue-400 { fill: #dcb877; }
+:root:not([data-theme="light"]) .text-emerald-600 { color: #5fcf9b; }
+:root:not([data-theme="light"]) .text-emerald-700 { color: #74d8a9; }
+:root:not([data-theme="light"]) .text-emerald-800 { color: #8fe3b9; }
+:root:not([data-theme="light"]) .text-emerald-900 { color: #a8ebc8; }
+:root:not([data-theme="light"]) .text-red-500 { color: #f08a7e; }
+:root:not([data-theme="light"]) .text-red-600 { color: #f39a8f; }
+:root:not([data-theme="light"]) .text-red-700 { color: #f5aca2; }
+:root:not([data-theme="light"]) .text-amber-700 { color: #f0c96a; }
+:root:not([data-theme="light"]) .text-amber-800 { color: #f5d685; }
+:root[data-theme="light"] .text-blue-600 { color: #8a6226; }
+:root[data-theme="light"] .text-blue-700 { color: #6b4b1f; }
+:root[data-theme="light"] .text-blue-800 { color: #4a3416; }
+:root[data-theme="light"] .text-blue-900 { color: #3a2810; }
+:root[data-theme="light"] .text-blue-400 { color: #a97a30; }
+:root[data-theme="light"] .text-blue-100 { color: #2a1f0c; }
+:root[data-theme="light"] .fill-blue-400 { fill: #a97a30; }
+:root[data-theme="light"] .text-emerald-600 { color: #1f8a5c; }
+:root[data-theme="light"] .text-emerald-700 { color: #17724a; }
+:root[data-theme="light"] .text-emerald-800 { color: #125b3b; }
+:root[data-theme="light"] .text-emerald-900 { color: #0d452d; }
+:root[data-theme="light"] .text-red-500 { color: #c94538; }
+:root[data-theme="light"] .text-red-600 { color: #b53a2e; }
+:root[data-theme="light"] .text-red-700 { color: #9a2f24; }
+:root[data-theme="light"] .text-amber-700 { color: #8a5a0a; }
+:root[data-theme="light"] .text-amber-800 { color: #6b4508; }
+:root[data-theme="light"] .text-gold-300, :root[data-theme="light"] .text-gold-400 { color: #8a6226; }
+:root[data-theme="light"] .gold-text { background: linear-gradient(135deg, #b8893a, #8a6226 60%, #6b4b1f); -webkit-background-clip: text; background-clip: text; color: transparent; }
+:root[data-theme="light"] .hairline-gold { background: linear-gradient(90deg, transparent, rgba(169,122,48,0.55), transparent); }
+:root[data-theme="light"] .bg-black\/60 { background-color: rgba(30,22,10,0.5); }
+:root[data-theme="light"] .shadow-2xl { --tw-shadow-color: rgba(70,52,22,0.25); }
+
+/* Tombol emas: teks gelap agar kontras */
+.bg-blue-500.text-white, .bg-blue-600.text-white, .bg-blue-700.text-white,
+.bg-brand-500.text-white, .bg-brand-400.text-white,
+.bg-blue-500.text-slate-950 {
+  color: #17120a;
+}
+.hover\:bg-blue-700:hover, .hover\:bg-brand-600:hover { filter: brightness(0.94); }
+
+/* Struk tetap seperti kertas (terang) */
+#printable-receipt {
+  background: #faf6ec !important; color: #2b2620 !important; border-color: #cbbf9f !important;
+}
+#printable-receipt .text-slate-500 { color: #7a705f; }
+#printable-receipt .text-slate-700, #printable-receipt .text-slate-800 { color: #2b2620; }
+#printable-receipt .text-slate-900 { color: #14110c; }
+#printable-receipt .border-slate-300 { border-color: #b9ad8f; }
+#printable-receipt .text-blue-700 { color: #7a5a24; }
+#printable-receipt .text-emerald-700, #printable-receipt .text-emerald-800 { color: #1f6b47; }
+#printable-receipt .text-red-600, #printable-receipt .text-red-700 { color: #b3382c; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--scroll); border-radius: 9999px; border: 2px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: var(--scroll-hover); background-clip: padding-box; border: 2px solid transparent; }
+
+@media print {
+  @page {
+    size: 80mm auto;
+    margin: 0;
+  }
+  /* Sembunyikan seluruh aplikasi, hanya struk yang dicetak */
+  #root {
+    display: none !important;
+  }
+  html, body {
+    background: #fff !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  /* Lepas batas tinggi/scroll modal supaya struk tercetak utuh */
+  .receipt-overlay {
+    position: static !important;
+    display: block !important;
+    background: none !important;
+    padding: 0 !important;
+    backdrop-filter: none !important;
+  }
+  .receipt-card {
+    max-height: none !important;
+    max-width: none !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+  .receipt-scroll {
+    overflow: visible !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+  #printable-receipt {
+    width: 80mm !important;
+    max-width: 80mm !important;
+    margin: 0 !important;
+    padding: 4mm !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: #fff !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}
+/* Banner gelap (KDS, Audit): sentuhan emas halus */
+.bg-ink-800.rounded-2xl, .bg-ink-900.rounded-2xl {
+  border: 1px solid var(--line);
+  background-image: linear-gradient(135deg, rgba(208,165,90,0.10), transparent 55%);
+}

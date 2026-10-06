@@ -1,0 +1,7 @@
+PERBAIKAN CRUD OWNER - INVENTORI BAHAN BAKU
+
+- OWNER dapat menambah, mengubah, dan menghapus bahan baku.
+- Tombol Hapus melakukan HARD DELETE/permanen.
+- Data relasi langsung ke bahan baku: recipe_ingredients, stock_mutations, stock_opname_items, supplier_prices, dan purchase_order_items ikut dihapus agar FK aman.
+- Audit log penghapusan tetap disimpan.
+- Tidak ada proses arsip/soft-delete pada tombol Hapus.
