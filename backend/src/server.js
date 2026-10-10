@@ -1,4 +1,5 @@
 const http = require('http');
+const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const { Server } = require('socket.io');
@@ -72,6 +73,18 @@ app.get('/api/health', (req, res) => {
     timestamp: new Date().toISOString()
   });
 });
+
+// Sajikan frontend hasil build (frontend/dist) dari service yang sama,
+// supaya /api dan /socket.io satu domain dengan halaman web.
+const distPath = path.join(__dirname, '../../frontend/dist');
+app.use(express.static(distPath));
+app.get(/^\/(?!api|socket\.io).*/, (req, res) => {
+  res.sendFile(path.join(distPath, 'index.html'));
+});
+
+if (!process.env.JWT_SECRET) {
+  console.warn('[Security] JWT_SECRET belum di-set. Set JWT_SECRET di environment sebelum dipakai publik!');
+}
 
 const PORT = process.env.PORT || 5000;
 

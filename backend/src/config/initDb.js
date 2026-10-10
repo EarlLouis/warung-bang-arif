@@ -1,21 +1,31 @@
 const mysql = require('mysql2/promise');
 const bcrypt = require('bcryptjs');
+const dotenv = require('dotenv');
+dotenv.config();
 
 async function initDatabase() {
+  const useSsl = ['true', '1'].includes(String(process.env.DB_SSL || '').toLowerCase());
+  const dbName = process.env.DB_NAME || 'Ayam_goreng_dan_bakar_bang_arif';
+
   const rootConfig = {
-    host: 'localhost',
-    port: 3306,
-    user: 'root',
-    password: '',
-    multipleStatements: true
+    host: process.env.DB_HOST || 'localhost',
+    port: parseInt(process.env.DB_PORT || '3306', 10),
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD || '',
+    multipleStatements: true,
+    ...(useSsl ? { ssl: { rejectUnauthorized: false } } : {})
   };
 
-  console.log('Connecting to MySQL server...');
+  console.log(`Connecting to MySQL server (${rootConfig.host}:${rootConfig.port})...`);
   const connection = await mysql.createConnection(rootConfig);
 
-  const dbName = 'Ayam_goreng_dan_bakar_bang_arif';
   console.log(`Creating database ${dbName} if not exists...`);
-  await connection.query(`CREATE DATABASE IF NOT EXISTS \`${dbName}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`);
+  try {
+    await connection.query(`CREATE DATABASE IF NOT EXISTS \`${dbName}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`);
+  } catch (err) {
+    // Di database cloud, user biasanya tidak boleh CREATE DATABASE (database sudah disediakan).
+    console.warn(`Skip CREATE DATABASE (${err.message}). Lanjut pakai database yang sudah ada.`);
+  }
   await connection.query(`USE \`${dbName}\`;`);
 
   console.log('Creating tables...');

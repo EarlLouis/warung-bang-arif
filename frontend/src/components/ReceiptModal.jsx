@@ -24,7 +24,7 @@ export default function ReceiptModal({ receiptData, onClose }) {
       `Metode: ${order.payment_method}\n` +
       `Dibayar: ${formatRupiah(order.amount_paid)}\n` +
       `Kembalian: ${formatRupiah(order.change_amount)}\n\n` +
-      `Beri kami ulasan di: http://localhost:3000?page=public-feedback&orderId=${order.id}\n` +
+      `Beri kami ulasan di: ${window.location.origin}/?page=public-feedback&orderId=${order.id}\n` +
       `_Matur Nuwun Atas Kunjungan Anda!_`;
 
     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
