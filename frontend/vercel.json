@@ -1,8 +1,17 @@
-   {
-     "rewrites": [
-       {
-         "source": "/api/:path*",
-         "destination": "https://warung-bang-arif.vercel.app/api/:path*"
-       }
-     ]
-   }
+
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://warung-bang-arif.vercel.app/api/:path*"
+    },
+    {
+      "source": "/socket.io/:path*",
+      "destination": "https://warung-bang-arif.vercel.app/socket.io/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
