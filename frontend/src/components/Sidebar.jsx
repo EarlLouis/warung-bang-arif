@@ -15,7 +15,6 @@ export default function Sidebar({ activeTab, setActiveTab, currentUser, onLogout
     { id: 'finance', label: 'Keuangan & HPP', icon: DollarSign, roles: ['OWNER'] },
     { id: 'crm', label: 'CRM & Komplain', icon: MessageSquareText, roles: ['OWNER', 'KASIR'] },
     { id: 'purchase-order', label: 'Purchase Order', icon: Truck, roles: ['OWNER'] },
-    { id: 'delivery', label: 'Integrasi Delivery', icon: Truck, roles: ['OWNER'] },
     { id: 'audit', label: 'Audit Log', icon: ShieldAlert, roles: ['OWNER'] },
   ];
 

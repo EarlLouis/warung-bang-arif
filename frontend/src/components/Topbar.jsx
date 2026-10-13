@@ -16,7 +16,6 @@ const PAGE_META = {
   finance: { title: 'Keuangan & HPP', subtitle: 'Laporan keuangan & rekonsiliasi shift' },
   crm: { title: 'CRM & Komplain', subtitle: 'Ulasan dan keluhan pelanggan' },
   'purchase-order': { title: 'Purchase Order', subtitle: 'Pengadaan bahan baku dari supplier' },
-  delivery: { title: 'Integrasi Delivery', subtitle: 'GoFood, GrabFood & ShopeeFood' },
   audit: { title: 'Audit Log', subtitle: 'Riwayat aktivitas sistem' },
 };
 

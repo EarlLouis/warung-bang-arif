@@ -60,7 +60,6 @@ export default function DashboardPage({ onNavigateTab }) {
         <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-xs text-ink-400">
           <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />Kasir POS aktif</span>
           <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />Layar dapur terhubung</span>
-          <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-gold-400" />GoFood &amp; GrabFood siaga</span>
         </div>
         <div className="flex items-center gap-2">
           <span className="flex items-center gap-2 px-3 py-2 text-xs text-ink-200">

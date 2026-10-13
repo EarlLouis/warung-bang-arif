@@ -51,7 +51,6 @@ const analyticsRouter = require('./routes/analytics');
 const crmRouter = require('./routes/crm');
 const notificationsRouter = require('./routes/notifications');
 const purchaseOrdersRouter = require('./routes/purchaseOrders');
-const deliveryRouter = require('./routes/delivery');
 
 app.use('/api/auth', authRouter);
 app.use('/api/pos', posRouter);
@@ -63,7 +62,6 @@ app.use('/api/analytics', analyticsRouter);
 app.use('/api/crm', crmRouter);
 app.use('/api/notifications', notificationsRouter);
 app.use('/api/po', purchaseOrdersRouter);
-app.use('/api/delivery', deliveryRouter);
 
 app.get('/api/health', (req, res) => {
   res.json({
@@ -103,9 +101,6 @@ async function startServer() {
       await pool.query(`ALTER TABLE ingredients ADD COLUMN is_active TINYINT(1) NOT NULL DEFAULT 1`);
       console.log('[Migration] Kolom ingredients.is_active berhasil ditambahkan.');
     }
-
-    await pool.query(`CREATE TABLE IF NOT EXISTS delivery_platforms (id INT AUTO_INCREMENT PRIMARY KEY, platform VARCHAR(30) NOT NULL UNIQUE, connected TINYINT(1) NOT NULL DEFAULT 0, updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP) ENGINE=InnoDB`);
-    await pool.query(`INSERT IGNORE INTO delivery_platforms (platform, connected) VALUES ('GOFOOD',0),('GRABFOOD',0),('SHOPEEFOOD',0)`);
 
     server.listen(PORT, () => {
       console.log(`=======================================================`);

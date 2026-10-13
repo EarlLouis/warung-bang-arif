@@ -13,7 +13,6 @@ import CustomerFeedbackPage from './pages/CustomerFeedbackPage';
 import PublicFeedbackPage from './pages/PublicFeedbackPage';
 import AuditLogPage from './pages/AuditLogPage';
 import PurchaseOrderPage from './pages/PurchaseOrderPage';
-import DeliveryPage from './pages/DeliveryPage';
 import { fetchApi, socket } from './utils/api';
 
 export default function App() {
@@ -208,10 +207,6 @@ export default function App() {
 
         {activeTab === 'purchase-order' && (
           <PurchaseOrderPage currentUser={currentUser} onNavigateTab={setActiveTab} />
-        )}
-
-        {activeTab === 'delivery' && (
-          <DeliveryPage currentUser={currentUser} />
         )}
 
         {activeTab === 'audit' && (

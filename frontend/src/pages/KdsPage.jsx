@@ -101,7 +101,7 @@ export default function KdsPage({ onNavigateTab }) {
           <Utensils className="w-12 h-12 stroke-1 text-slate-300 mx-auto" />
           <h3 className="text-sm font-bold text-slate-700">Dapur Sedang Tenang</h3>
           <p className="text-xs text-slate-400 max-w-sm mx-auto">
-            Semua pesanan telah selesai dimasak dan disajikan. Pesanan baru dari POS atau Delivery akan muncul seketika di sini.
+            Semua pesanan telah selesai dimasak dan disajikan. Pesanan baru dari POS akan muncul seketika di sini.
           </p>
         </div>
       ) : (
