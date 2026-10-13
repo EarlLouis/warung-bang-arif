@@ -7,11 +7,20 @@ import { fetchApi, formatRupiah } from '../utils/api';
 export default function DashboardPage({ onNavigateTab }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [range, setRange] = useState('7d');
+
+  const RANGES = [
+    { id: '7d', label: '7 Hari', long: '7 hari terakhir' },
+    { id: '30d', label: '1 Bulan', long: '30 hari terakhir' },
+    { id: '1y', label: '1 Tahun', long: '1 tahun terakhir' },
+    { id: 'all', label: 'Semua', long: 'sepanjang waktu jualan' },
+  ];
+  const rangeLong = RANGES.find(r => r.id === range).long;
 
   const loadData = async () => {
     try {
       setLoading(true);
-      const res = await fetchApi('/analytics/dashboard');
+      const res = await fetchApi(`/analytics/dashboard?range=${range}`);
       setData(res);
     } catch (err) {
       console.error(err);
@@ -22,7 +31,7 @@ export default function DashboardPage({ onNavigateTab }) {
 
   useEffect(() => {
     loadData();
-  }, []);
+  }, [range]);
 
   const handleExportCSV = () => {
     const token = localStorage.getItem('bangarif_token');
@@ -34,7 +43,7 @@ export default function DashboardPage({ onNavigateTab }) {
     window.open(url, '_blank');
   };
 
-  if (loading || !data) {
+  if (!data) {
     return (
       <div className="p-8 flex items-center justify-center min-h-[60vh]">
         <div className="text-center space-y-3">
@@ -112,15 +121,33 @@ export default function DashboardPage({ onNavigateTab }) {
         </button>
       </section>
 
+      {/* Pilihan periode untuk Jam ramai + Menu terlaris */}
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <p className="text-xs text-ink-400">Periode grafik jam ramai &amp; menu terlaris</p>
+        <div className="inline-flex rounded-lg border border-slate-900/[0.08] bg-panel p-1 gap-1">
+          {RANGES.map((r) => (
+            <button
+              key={r.id}
+              onClick={() => setRange(r.id)}
+              className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
+                range === r.id ? 'bg-gold-300 text-black' : 'text-ink-300 hover:text-slate-900'
+              }`}
+            >
+              {r.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Jam ramai + menu terlaris */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <section className={`lg:col-span-2 ${panel} p-6`}>
           <div className="flex items-baseline justify-between gap-4">
             <div>
               <h3 className="font-display text-xl font-semibold text-slate-900">Jam ramai</h3>
-              <p className="text-xs text-ink-400 mt-1">Jumlah pesanan per jam, 11.00 – 00.00 WIB</p>
+              <p className="text-xs text-ink-400 mt-1">Jumlah pesanan per jam, {rangeLong} (11:00 – 00:00 WIB)</p>
             </div>
-            {peak && <p className="text-xs text-ink-300">Puncak pukul <span className="text-gold-300 font-medium">{peak.hourLabel}.00</span></p>}
+            {peak && <p className="text-xs text-ink-300">Puncak pukul <span className="text-gold-300 font-medium">{peak.hourLabel} WIB</span></p>}
           </div>
 
           <div className="mt-8 h-44 flex items-end gap-2 sm:gap-3 border-b border-slate-900/[0.08]">
@@ -130,7 +157,7 @@ export default function DashboardPage({ onNavigateTab }) {
               return (
                 <div key={hour.hour} className="group relative flex-1 h-full flex items-end justify-center">
                   <div className="opacity-0 group-hover:opacity-100 absolute bottom-full mb-2 z-20 pointer-events-none transition-opacity bg-pop border border-slate-900/10 text-[11px] px-2.5 py-1.5 rounded-md whitespace-nowrap">
-                    <div className="text-ink-300">{hour.hourLabel}.00 WIB</div>
+                    <div className="text-ink-300">{hour.hourLabel} WIB</div>
                     <div className="text-slate-900 font-medium">{hour.orderCount} pesanan · {formatRupiah(hour.totalOmzet)}</div>
                   </div>
                   <div
@@ -152,11 +179,11 @@ export default function DashboardPage({ onNavigateTab }) {
 
         <section className={`${panel} p-6 flex flex-col`}>
           <h3 className="font-display text-xl font-semibold text-slate-900">Menu terlaris</h3>
-          <p className="text-xs text-ink-400 mt-1">Paling banyak dipesan</p>
+          <p className="text-xs text-ink-400 mt-1">Paling banyak dipesan, {rangeLong}</p>
 
           <ol className="mt-4 flex-1 divide-y divide-slate-900/[0.06]">
             {data.topMenus.length === 0 && (
-              <li className="py-6 text-sm text-ink-400">Belum ada penjualan. Menu terlaris muncul setelah ada transaksi.</li>
+              <li className="py-6 text-sm text-ink-400">Belum ada penjualan pada periode ini.</li>
             )}
             {data.topMenus.map((menu, idx) => (
               <li key={menu.id} className="flex items-center gap-4 py-3">

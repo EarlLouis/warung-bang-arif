@@ -6,6 +6,13 @@ const { requireAuth, requireRole } = require('./auth');
 // GET /api/analytics/dashboard
 router.get('/dashboard', async (req, res) => {
   try {
+    // Periode untuk grafik Jam ramai & Menu terlaris: 7d | 30d | 1y | all
+    const RANGE_DAYS = { '7d': 7, '30d': 30, '1y': 365 };
+    const range = Object.prototype.hasOwnProperty.call(RANGE_DAYS, req.query.range) ? req.query.range : 'all';
+    const days = RANGE_DAYS[range];
+    const rangeSql = days ? `AND created_at >= DATE_SUB(NOW(), INTERVAL ${days} DAY)` : '';
+    const rangeSqlO = days ? `AND o.created_at >= DATE_SUB(NOW(), INTERVAL ${days} DAY)` : '';
+
     // 1. Overall stats
     const [todayStats] = await pool.query(`
       SELECT 
@@ -30,7 +37,7 @@ router.get('/dashboard', async (req, res) => {
         COUNT(id) as order_count,
         COALESCE(SUM(total_amount), 0) as total_omzet
       FROM orders
-      WHERE status != 'CANCELLED'
+      WHERE status != 'CANCELLED' ${rangeSql}
       GROUP BY HOUR(created_at)
       ORDER BY hour ASC
     `);
@@ -51,11 +58,11 @@ router.get('/dashboard', async (req, res) => {
     const [topMenus] = await pool.query(`
       SELECT 
         m.id, m.name, m.code, m.category,
-        COALESCE(SUM(oi.qty), 0) as total_qty_sold,
-        COALESCE(SUM(oi.subtotal), 0) as total_revenue
+        COALESCE(SUM(CASE WHEN o.id IS NOT NULL THEN oi.qty ELSE 0 END), 0) as total_qty_sold,
+        COALESCE(SUM(CASE WHEN o.id IS NOT NULL THEN oi.subtotal ELSE 0 END), 0) as total_revenue
       FROM menus m
       LEFT JOIN order_items oi ON m.id = oi.menu_id
-      LEFT JOIN orders o ON oi.order_id = o.id AND o.status != 'CANCELLED'
+      LEFT JOIN orders o ON oi.order_id = o.id AND o.status != 'CANCELLED' ${rangeSqlO}
       GROUP BY m.id
       ORDER BY total_qty_sold DESC
     `);
@@ -88,8 +95,9 @@ router.get('/dashboard', async (req, res) => {
       todayOrders: todayStats[0].today_orders,
       monthOmzet: parseFloat(monthStats[0].month_omzet),
       monthOrders: monthStats[0].month_orders,
+      range,
       peakHours,
-      topMenus: topMenus.slice(0, 5),
+      topMenus: topMenus.filter(m => Number(m.total_qty_sold) > 0).slice(0, 5),
       lowMenus: topMenus.slice(-3).reverse(),
       channelStats,
       lowStockCount: lowStockCount[0].count,
